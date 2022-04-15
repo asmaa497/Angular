@@ -1,0 +1,50 @@
+
+  <h1>{{strore.name}}</h1>
+  <img [src]="strore.logo">
+  <select [(ngModel)]="selectedCatID" (change)="selected()">
+    <option *ngFor="let item of categroy" [ngValue]="item.ID">{{ item.name }} </option>
+  </select>
+  <input [(ngModel)]="ClientName" >
+  
+  <table class="table" [hidden]="!IsPurshased">
+    
+    <ng-container *ngFor="let item of prdListOfCat" >
+      <tr *ngIf=" item.quantity!=0" [ngStyle]="{'background-color':item.quantity==1? 'yellow':'lightgray', 'color':item.quantity>1? 'red':'darkblue'}">
+      <td>{{ item.ID }}</td>
+      <td>{{ item.name }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>{{ item.price |currency:'EGP' }}</td>
+      <td><img src="{{ item.img }}" /></td>
+      <td>{{ item.catID }}</td>
+      <td>{{ item.date |  date:'medium' }}</td>
+      <td><a  class="btn btn-primary"  role="button" [routerLink]="['/Products', item.ID]">Details</a></td>
+      <td><button (click)="decrease(item.ID)">Decrease Quantity</button></td>
+      <td><input #itemsCount type="number" [max]="item.quantity" min="0" class="form-control" style="background-color: white;"></td>
+      <td><button  class="btn btn-warning" (click)="AddToCartBtn(+itemsCount.value,item.ID)">Add To Cart</button></td>
+      </tr>
+    </ng-container>
+  </table>
+  <div [hidden]="IsPurshased">
+    <h1>Thanks for purchasing from our Store {{ClientName}}</h1>
+  </div>
+  <div>
+    <button (click)="hide()">BUY</button>
+
+  </div>
+
+
+  <div class="card" style="width: 18rem;" ProductCard defaultColor="yellow" >
+    <img src="https://fakeimg.pl/250x100/" class="card-img-top" alt="card">
+    <div class="card-body" >
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text" style="color: blue;">asmmmklsdfmmmmmmmmmmmmmmmmmmmmmmmmmmmffffffffffffffffffffffffffffffffffffffffffffffffff</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+  <div style="text-align: center;font-size: 50px;">{{birthDate | nationalID:"full"}}</div>
+  <div style="text-align: center;font-size: 50px;">{{creditCart | credit}}</div>
+
+  
+
+  
+
