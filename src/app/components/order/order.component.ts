@@ -1,6 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { CategoryService } from 'src/app/services/category.service';
+
 import { ProductService } from 'src/app/services/product.service';
 import { ICategory } from 'src/app/ViewModels/ICategory';
+import { IProduct } from 'src/app/ViewModels/IProduct';
 import { IProductQuantity } from 'src/app/ViewModels/iproduct-quantity';
 import { ProductsComponent } from '../products/products.component';
 
@@ -16,8 +19,11 @@ export class OrderComponent implements OnInit,AfterViewInit {
   ReceivedCartItems:IProductQuantity[]=[]
   @ViewChild('feedback') feedback!:ElementRef
   @ViewChild(ProductsComponent) ProductsCompObj!: ProductsComponent;
-  constructor(private ProService:ProductService) { 
-
+  constructor(
+    private ProService:ProductService,
+    private CatService:CategoryService 
+    ) { 
+/*
    this.category=[
      {
        ID:1,
@@ -33,9 +39,15 @@ export class OrderComponent implements OnInit,AfterViewInit {
     }
    ]
 
-  }
+    
+   */ 
+
+
+}
+  
   ngAfterViewInit(): void {
     this.feedback.nativeElement.style.backgroundColor="lightblue";
+    this.feedback.nativeElement.value="asmaa ismail";
     console.log(this.feedback.nativeElement.value);
     //console.log(this.ProductsCompObj.ProductList) // using View Child
     console.log(this.ProService.getAllProducts())
@@ -43,19 +55,28 @@ export class OrderComponent implements OnInit,AfterViewInit {
   }
   
   ngOnInit() {
+    
+    this.CatService.getAllCateogories().subscribe(CatLst=>{
+      this.category=CatLst;
+    
+    })
+    
   }
   showCart(CartObj:IProductQuantity)
   {
-     console.log(CartObj);
+     console.log("cart OBJ "+CartObj);
      this.ReceivedCartItems.push(CartObj);
      this.totalPrice+=CartObj.total;
   }
   confirm()
   {
     //var ExternalProductList=this.ProductsCompObj.ProductList; // using View Child
-    var ExternalProductList=this.ProService.getAllProducts();
+    var ExternalProductList:IProduct[]
+    this.ProService.getAllProducts().subscribe(ProLst=>{
+      ExternalProductList=ProLst;
+    });
     this.ReceivedCartItems.forEach(element => {
-      var pro=ExternalProductList.find(p=>p.ID==element.ID)
+      var pro=ExternalProductList.find(p=>p.id==element.ID)
       if(pro!=null)
       {
         pro.quantity-=element.count;
@@ -84,9 +105,14 @@ export class OrderComponent implements OnInit,AfterViewInit {
   }
   increase(item:IProductQuantity)
   {
+    var ExternalProductList:IProduct[]=[]
+    this.ProService.getAllProducts().subscribe(ProLst=>{
+      ExternalProductList=ProLst;
+    });
+    
     //var ExternalProductList=this.ProductsCompObj.ProductList; // using View Child
-    var ExternalProductList=this.ProService.getAllProducts();
-    var prod=ExternalProductList.find(p=>p.ID==item.ID);
+    //var ExternalProductList=this.ProService.getAllProducts();
+    var prod=ExternalProductList.find(p=>p.id==item.ID);
     if(prod && item.count<prod.quantity)
     {
       item.count++;

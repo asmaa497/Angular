@@ -19,11 +19,24 @@ export class ProductDetailsComponent implements OnInit {
     , private location: Location) { }
 
   ngOnInit(): void {
-    this.prdIDsList=this.prdService.getPrdIDsList();
+    //this.prdIDsList=this.prdService.getPrdIDsList();
+    //this.currPrdID=Number(this.activatedRoute.snapshot.paramMap.get("pid"));
+    this.currPrdID=Number(this.activatedRoute.snapshot.paramMap.get("pid"));
+    console.log("current prod id  "+this.currPrdID);
+    this.prdService.getProductByID(this.currPrdID).subscribe(prd=>{
+      this.currPrd=prd;
+    });
+
+    
+    
+    /*
     this.activatedRoute.paramMap.subscribe(paramMap=>{
       this.currPrdID=Number(paramMap.get("pid"));
-      this.currPrd=this.prdService.getProductByID(this.currPrdID);
+      this.prdService.getProductByID(this.currPrdID).subscribe(Pro=>{
+        this.currPrd=Pro;
+      });
     });
+    */
   }
 
   goBack()
@@ -61,5 +74,6 @@ export class ProductDetailsComponent implements OnInit {
   {
     return this.currPrdID==this.prdIDsList[this.prdIDsList.length-1];
   }
+  
 
 }

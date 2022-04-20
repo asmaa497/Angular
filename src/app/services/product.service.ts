@@ -1,4 +1,7 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { IProduct } from '../ViewModels/IProduct';
 
 @Injectable({
@@ -6,7 +9,15 @@ import { IProduct } from '../ViewModels/IProduct';
 })
 export class ProductService {
   ProductList: IProduct[]=[];
-  constructor() { 
+  private httpOptions;
+  constructor(private httpClient: HttpClient) { 
+    this.httpOptions={
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+        // , Authorization': 'Token'
+      })
+    }
+    /*
     this.ProductList = [
 
       {
@@ -109,8 +120,10 @@ export class ProductService {
       },
 
     ];
+    */
 
   }
+  /*
   getProductsByCatID(catID:number): IProduct[]
   {
        if(catID==0)
@@ -135,4 +148,45 @@ export class ProductService {
   {
     return this.ProductList.map(prd=>prd.ID);
   }
+  */
+  getAllProducts(): Observable<IProduct[]>
+  {
+    return this.httpClient.get<IProduct[]>(`${environment.APIBaseURL}/products`)
+        // .pipe(
+        //   retry(3),
+        //   catchError((err)=>{})
+        // );
+  }
+
+  getProductsByCatID(catID: number): Observable<IProduct[]>
+  {
+       if(catID==0)
+       {
+        return this.httpClient.get<IProduct[]>(`${environment.APIBaseURL}/products`);
+       }
+       else
+       { 
+        return this.httpClient.get<IProduct[]>(`${environment.APIBaseURL}/products?catID=${catID}`);       
+      }
+    
+  }
+  getProductByID(prdID: number|undefined): Observable<IProduct>
+  {
+    return this.httpClient.get<IProduct>(`${environment.APIBaseURL}/products/${prdID}`);
+  }
+
+  addNewProduct(newPrd: IProduct): Observable<IProduct>
+  {
+    return this.httpClient.post<IProduct>(`${environment.APIBaseURL}/products`, JSON.stringify(newPrd),this.httpOptions);
+  }
+
+  updatePro(updatedPro: IProduct, id: number): Observable<IProduct> 
+  {
+    return this.httpClient.patch<IProduct>(`${environment.APIBaseURL}/products/${id}`, updatedPro)
+  }
+  DeletePro( id: number|undefined): Observable<IProduct> 
+  {
+    return this.httpClient.delete<IProduct>(`${environment.APIBaseURL}/products/${id}`);
+  }
+  
 }

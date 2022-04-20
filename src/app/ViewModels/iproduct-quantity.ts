@@ -1,5 +1,5 @@
 export interface IProductQuantity {
-    ID:number,
+    ID:number|undefined,
     name:string,
     price:number,
     count:number,

@@ -1,10 +1,10 @@
 export interface IProduct {
-    ID:number;
+    id?:number;
     name:string;
     quantity:number;
     price:number;
     img:string;
     catID:number;
-    date:Date
+    date?:Date
 
 }
