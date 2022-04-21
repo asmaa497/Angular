@@ -39,6 +39,22 @@
     <div class="mb-4" *ngFor="let mobile of mobileNumArray.controls; let i=index">
       <label for="Umob + {{i}}" class="form-label">Mobile No. {{i+1}}</label>
       <input type="text" [formControlName]="i" class="form-control" name="Umob + {{i}}" id="Umob + {{i}}"
+        placeholder="Enter Mobile" [class.is-valid]=" mobileNumArray.controls[i].valid" 
+          [class.is-invalid]="mobileNumArray.controls[i].invalid && mobileNumArray.controls[i].touched">
+        <div [hidden]="mobileNumArray.controls[i].valid || mobileNumArray.controls[i].untouched">
+          <small *ngIf="mobileNumArray.controls[i].errors?.['pattern']" id="pattern" 
+            class="form-text text-muted d-block">Enter valid Phone</small>
+        </div>
+    </div>
+    <button type="button" class="btn btn-danger " (click)="addPhone()">+</button>
+    <button type="button" class="btn btn-success mx-2" (click)="removePhone()">-</button>
+  </div>
+
+
+  <!-- <div formArrayName="mobileNum">
+    <div class="mb-4" *ngFor="let mobile of mobileNumArray.controls; let i=index">
+      <label for="Umob + {{i}}" class="form-label">Mobile No. {{i+1}}</label>
+      <input type="text" [formControlName]="i" class="form-control" name="Umob + {{i}}" id="Umob + {{i}}"
         placeholder="Enter Mobile" [class.is-valid]="mobileNumArray.valid" [class.is-invalid]="mobileNumArray.invalid && mobileNumArray.touched">
         <div [hidden]="mobileNumArray.valid || mobileNumArray.untouched">
           <small *ngIf="mobileNumArray.errors?.['pattern']" id="pattern" class="form-text text-muted d-block">Enter valid Phone</small>
@@ -46,7 +62,7 @@
     </div>
     <button type="button" class="btn btn-danger " (click)="addPhone()">+</button>
     <button type="button" class="btn btn-success mx-2" (click)="removePhone()">-</button>
-  </div>
+  </div> -->
 
   <div class="mb-4">
     <label class="form-label mx-2">which day do you want ? </label>

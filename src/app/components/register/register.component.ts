@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
     this.RegFormGroup=fb.group({
       fullName:['',[Validators.required,Validators.minLength(5)]],
       email:['',[Validators.required,Validators.email]],
-      mobileNum:fb.array([fb.control('')],[Validators.required,Validators.pattern("^01[0-2,5]{1}[0-9]{8}$")]),
+      mobileNum:fb.array([fb.control('',[Validators.required,Validators.pattern("^01[0-2,5]{1}[0-9]{8}$")])]),
       address:fb.group({
         city:['',Validators.required],
         postalCode:['',Validators.required],
@@ -37,6 +37,12 @@ export class RegisterComponent implements OnInit {
   get mobileNumArray(): FormArray {
     return this.RegFormGroup.controls['mobileNum'] as FormArray;
   }
+  getValidityPhone(i:number) {
+    return (<FormArray>this.RegFormGroup.get('mobileNumArray')).controls[i].valid;
+  }
+  getInValidityPhone(i:number) {
+    return (<FormArray>this.RegFormGroup.get('mobileNumArray')).controls[i].invalid && (<FormArray>this.RegFormGroup.get('mobileNumArray')).controls[i].touched;
+  }
 
   get deliveryOptions() {
     return this.RegFormGroup.controls['deliveryOptions'];
@@ -54,7 +60,11 @@ export class RegisterComponent implements OnInit {
   }
 
   addPhone() {
-    this.mobileNumArray.push(this.fb.control(''));
+    if(this.mobileNumArray.controls[this.mobileNumArray.length-1].value !="")
+    {
+      this.mobileNumArray.push(this.fb.control(''));
+    }
+    
   }
   removePhone() {
     if(this.mobileNumArray.length>1)
