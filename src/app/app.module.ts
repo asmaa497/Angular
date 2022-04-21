@@ -20,7 +20,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import {HttpClientModule} from '@angular/common/http';
-import { NewProductComponent } from './components/new-product/new-product.component'
+import { NewProductComponent } from './components/new-product/new-product.component';
+import { LogoutComponent } from './components/logout/logout.component'
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { NewProductComponent } from './components/new-product/new-product.compon
     RegisterComponent,
     LayoutComponent,
     NewProductComponent,
+    LogoutComponent,
    
   ],
   imports: [

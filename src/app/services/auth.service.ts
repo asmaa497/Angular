@@ -25,7 +25,17 @@ export class AuthService {
   }
   Login()
   {
-    
+    // this should call login API 
+    let UserToken="aamlkemfk2365rkmflkaa21g5aetg453t";
+    localStorage.setItem("token",UserToken);
+  }
+  Logout()
+  {
+    localStorage.removeItem("token");
+  }
+  get IsLogged()
+  {
+     return (localStorage.getItem('token'))?true:false;
   }
 
 

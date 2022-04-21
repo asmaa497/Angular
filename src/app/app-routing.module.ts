@@ -5,6 +5,7 @@ import { ContactUsComponent } from './components/contact-us/contact-us.component
 import { HomeComponent } from './components/home/home.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
 import { NewProductComponent } from './components/new-product/new-product.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { OrderComponent } from './components/order/order.component';
@@ -22,10 +23,17 @@ const routes: Routes = [
     {path:'AboutUs', component:AboutUsComponent},
     {path:'ContactUs', component:ContactUsComponent}, 
     {path:'NewProduct/:pid', component:NewProductComponent}, 
+    
 
   ]},
+  
   {path:'login', component:LoginComponent},
+  {path:'logout', component:LogoutComponent},
   {path:'register', component:RegisterComponent},
+  {
+    path: 'User',
+    loadChildren: () => import('src/app/components/user-mod/user-mod.module').then(m => m.UserModModule)
+  },
   {path:'**', component:NotFoundComponent}
 ];
 
