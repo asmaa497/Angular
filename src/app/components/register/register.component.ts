@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
         postalCode:['',Validators.required],
         street:['',Validators.required]
       }),
-      password:['',[Validators.required,Validators.minLength(6)]],
+      password:['',[Validators.required,Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$")]],
       confirmPassword:[''],
       deliveryOptions:[''],
       specificDays:['']
@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit {
   addPhone() {
     if(this.mobileNumArray.controls[this.mobileNumArray.length-1].value !="")
     {
-      this.mobileNumArray.push(this.fb.control(''));
+      this.mobileNumArray.push(this.fb.control('',[Validators.required,Validators.pattern("^01[0-2,5]{1}[0-9]{8}$")]));
     }
     
   }

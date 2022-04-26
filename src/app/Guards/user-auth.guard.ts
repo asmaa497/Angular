@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserAuthGuard implements CanActivate {
+  constructor (private route:Router)
+  {}
   canActivate(
     route: ActivatedRouteSnapshot,
     
@@ -16,6 +18,7 @@ export class UserAuthGuard implements CanActivate {
     }
     else
     {
+      this.route.navigate(['/login'])
       return false;
     }
     

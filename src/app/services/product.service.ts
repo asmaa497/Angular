@@ -151,7 +151,7 @@ export class ProductService {
   */
   getAllProducts(): Observable<IProduct[]>
   {
-    return this.httpClient.get<IProduct[]>(`${environment.APIBaseURL}/products`)
+    return this.httpClient.get<IProduct[]>(`${environment.APIBaseURL}/product`)
         // .pipe(
         //   retry(3),
         //   catchError((err)=>{})
@@ -160,19 +160,20 @@ export class ProductService {
 
   getProductsByCatID(catID: number): Observable<IProduct[]>
   {
+    console.log("ddddddd "+catID);
        if(catID==0)
        {
-        return this.httpClient.get<IProduct[]>(`${environment.APIBaseURL}/products`);
+        return this.httpClient.get<IProduct[]>(`${environment.APIBaseURL}/product`);
        }
        else
        { 
-        return this.httpClient.get<IProduct[]>(`${environment.APIBaseURL}/products?catID=${catID}`);       
+        return this.httpClient.get<IProduct[]>(`${environment.APIBaseURL}/product/CatID?id=${catID}`);       
       }
     
   }
   getProductByID(prdID: number|undefined): Observable<IProduct>
   {
-    return this.httpClient.get<IProduct>(`${environment.APIBaseURL}/products/${prdID}`);
+    return this.httpClient.get<IProduct>(`${environment.APIBaseURL}/product/${prdID}`);
   }
 
   addNewProduct(newPrd: IProduct): Observable<IProduct>

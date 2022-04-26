@@ -1,10 +1,10 @@
 
-  <h1>{{strore.name}}</h1>
-  <img [src]="strore.logo">
-  <select [(ngModel)]="selectedCatID" (change)="selected()">
-    <option *ngFor="let item of categroy" [ngValue]="item.ID">{{ item.name }} </option>
+  <h1 style="color: green;margin-left: 40%;">{{strore.name}}</h1>
+  <!-- <img [src]="strore.logo"> -->
+  <!-- <select [(ngModel)]="selectedCatID" (change)="selected()">
+    <option *ngFor="let item of categroy" [ngValue]="item.id">{{ item.name }} </option>
   </select>
-  <input [(ngModel)]="ClientName" >
+  <input [(ngModel)]="ClientName" > -->
   
   <table class="table" [hidden]="!IsPurshased">
     
@@ -21,7 +21,7 @@
       <td><a  class="btn btn-primary"  role="button" [routerLink]="['/NewProduct', item.id]">Edit</a></td>
       <td><a  class="btn btn-primary"  role="button" (click)="DeletePro(item.id)">Delete</a></td>
       <td><button (click)="decrease(item.id)">Decrease Quantity</button></td>
-      <td><input #itemsCount type="number" [max]="item.quantity" min="0" class="form-control" style="background-color: white;"></td>
+      <td><input #itemsCount type="number" [max]="item.quantity" min="1" class="form-control" style="background-color: white;"></td>
       <td><button  class="btn btn-warning" (click)="AddToCartBtn(+itemsCount.value,item?.id)">Add To Cart</button></td>
       </tr>
     </ng-container>
@@ -29,23 +29,30 @@
   <div [hidden]="IsPurshased">
     <h1>Thanks for purchasing from our Store {{ClientName}}</h1>
   </div>
-  <div>
+  <!-- <div>
     <button (click)="hide()">BUY</button>
 
-  </div>
+  </div> -->
 
-
-  <div class="card" style="width: 18rem;" ProductCard defaultColor="yellow" >
-    <img src="https://fakeimg.pl/250x100/" class="card-img-top" alt="card">
+  <div *ngFor="let item of prdListOfCat" style="display: inline-block;" class="mx-3 mb-3">
+  <div class="card" style="width: 18rem;" ProductCard defaultColor="yellow"   > <!--  -->
+    <img src="{{item.img}}" class="card-img-top" alt="card">
     <div class="card-body" >
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text" style="color: blue;">asmmmklsdfmmmmmmmmmmmmmmmmmmmmmmmmmmmffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <h5 class="card-title">{{item.name}}</h5>
+      <p class="card-text" style="color: blue;">Price : {{item.price}}</p>
+      <p class="card-text" style="color: blue;">Quantity : {{item.quantity}}</p>
+      <div>
+        <input #itemsCount type="number" [max]="item.quantity" min="1" class="form-control" style="background-color: white;">
+      </div>
+      <button  class="btn btn-warning mb-1 mt-2" style="width: 100%;" (click)="AddToCartBtn(+itemsCount.value,item?.id)">Add To Cart</button>
+      <a href="#" class="btn btn-warning mb-1 mt-1" style="width: 100%;" role="button" [routerLink]="['/Products', item.id]">Details</a>
     </div>
   </div>
-  <div style="text-align: center;font-size: 50px;">{{birthDate | nationalID:"full"}}</div>
-  <div style="text-align: center;font-size: 50px;">{{creditCart | credit}}</div>
+  </div>
   <td><button [routerLink]="['/NewProduct',0]">Add New Product</button></td>
+  <!-- <div style="text-align: center;font-size: 50px;">{{birthDate | nationalID:"full"}}</div>
+  <div style="text-align: center;font-size: 50px;">{{creditCart | credit}}</div> -->
+  
 
 
   

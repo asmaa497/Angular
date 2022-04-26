@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit,OnChanges{
   IsPurshased  :boolean;
   ClientName: string;
   //ProductList: IProduct[]=[];
-  categroy:ICategory[];
+  categroy:ICategory[]=[];
   selectedCatID:number=1
   prdListOfCat:IProduct[]=[];
   @Input() receivedSelCatID:number=0;
@@ -29,146 +29,23 @@ export class ProductsComponent implements OnInit,OnChanges{
   constructor(private ProService:ProductService) {
     this.onAddToCart= new EventEmitter<IProductQuantity>();
     this.strore.logo = "https://fakeimg.pl/250x100/";
-    this.strore.name = "store";
+    this.strore.name = "ZARA Store";
     this.strore.branches = ["assuit", "sohag"];
     this.ClientName = "asmaa";
     this.IsPurshased=true;
-    this.categroy = [
-
-      { name: 'FrancPerfume', ID: 1 },
-
-      { name: 'EgypePerfume', ID: 2 },
-
-      { name: 'CandaPerfume', ID: 3 },
-
-    ];
     
-   
-    /*
-    this.ProductList = [
-
-      {
-
-        ID: 1,
-
-        name: 'product1',
-
-        quantity: 9,
-
-        price: 400,
-
-        img: 'https://fakeimg.pl/250x100/',
-
-        catID: 1,
-        date:new Date()
-
-      },
-      {
-
-        ID: 2,
-
-        name: 'product11',
-
-        quantity: 1,
-
-        price: 400,
-
-        img: 'https://fakeimg.pl/250x100/',
-
-        catID: 1,
-        date:new Date()
-
-      },
-
-      {
-
-        ID: 3,
-
-        name: 'product2',
-
-        quantity: 30,
-
-        price: 400,
-
-        img: 'https://fakeimg.pl/250x100/',
-
-        catID: 2,
-        date:new Date()
-
-      },
-      {
-
-        ID: 4,
-
-        name: 'product22',
-
-        quantity: 30,
-
-        price: 400,
-
-        img: 'https://fakeimg.pl/250x100/',
-
-        catID: 2,
-        date:new Date()
-
-      },
-
-      {
-
-        ID: 5,
-
-        name: 'product3',
-
-        quantity: 30,
-
-        price: 400,
-
-        img: 'https://fakeimg.pl/250x100/',
-
-        catID: 3,
-        date:new Date()
-
-      },
-      {
-
-        ID: 6,
-
-        name: 'product33',
-
-        quantity: 30,
-
-        price: 400,
-
-        img: 'https://fakeimg.pl/250x100/',
-
-        catID: 3,
-        date:new Date()
-
-      },
-
-    ];
-*/
   }
   ngOnChanges(changes: SimpleChanges): void {
     console.log("this.receivedSelCatID"+this.receivedSelCatID);
     this.ProService.getProductsByCatID(this.receivedSelCatID).subscribe(prdList=>{
-      //console.log(prdList);
+      console.log("the list coming "+JSON.stringify(prdList));
       this.prdListOfCat=prdList;
     });
     
-    /*
-    if (this.receivedSelCatID==0)
-    {
-      this.prdListOfCat=this.ProductList;
-    }
-    else
-    {
-      this.prdListOfCat=this.ProductList.filter(prd=> prd.catID==this.receivedSelCatID);
-    }
-    */
+    
   }
   ngOnInit() :void{
-    console.log("this.receivedSelCatID"+this.receivedSelCatID);
+    console.log("this.receivedSelCatID  "+this.receivedSelCatID);
     this.ProService.getAllProducts().subscribe(prdList=>{
       this.prdListOfCat=prdList;
     });
@@ -193,31 +70,18 @@ export class ProductsComponent implements OnInit,OnChanges{
       })
     })
    
-    // this.ProService.getAllProducts().forEach(element => {
-    //   if(element.ID==id)
-    //   {
-    //     element.quantity--;
-    //   }
-    // });
-    /*
-    this.ProductList.forEach(element => {
-      if(element.ID==id)
-      {
-        element.quantity--;
-      }
-    });
-*/
+    
   
   }
   AddToCartBtn(itemsCount:number, ProID:number|undefined)
   {
-    alert(ProID);
-    console.log(itemsCount);
+    //alert(ProID);
+    //console.log(itemsCount);
     var Test:IProduct
     this.ProService.getProductByID(ProID).subscribe((prod)=>{
       Test=prod;    
-      console.log(Test);
-      if(prod!=null && prod.quantity>=itemsCount)
+      //console.log(Test);
+      if(prod!=null && prod.quantity>=itemsCount && itemsCount!=0)
       {
         let myObj:IProductQuantity=
         {
@@ -227,9 +91,13 @@ export class ProductsComponent implements OnInit,OnChanges{
            price:prod.price,
            total:prod.price*itemsCount
          }
-         alert("muobj "+myObj);
+        //  alert("muobj "+myObj);
          this.onAddToCart.emit(myObj);
          
+      }
+      else
+      {
+        alert("Invalid Quantity");
       }
     });
     //console.log("asmaa");      

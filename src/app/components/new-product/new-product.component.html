@@ -28,7 +28,7 @@
       <label for="CatSel" class="form-label">Select Category</label>
       <select class="form-control" [(ngModel)]="newPrd.catID"
         name="cat" id="CatSel" title="catgory" required>
-        <option *ngFor="let cat of catList" [value]="cat.ID">{{cat.name}}</option>
+        <option *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</option>
       </select>
     </div>
     <div class="mb-3">

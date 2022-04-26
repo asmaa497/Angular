@@ -57,6 +57,7 @@ export class OrderComponent implements OnInit,AfterViewInit {
   ngOnInit() {
     
     this.CatService.getAllCateogories().subscribe(CatLst=>{
+      console.log(JSON.stringify(CatLst));
       this.category=CatLst;
     
     })
@@ -71,18 +72,25 @@ export class OrderComponent implements OnInit,AfterViewInit {
   confirm()
   {
     //var ExternalProductList=this.ProductsCompObj.ProductList; // using View Child
-    var ExternalProductList:IProduct[]
+    var ExternalProductList:IProduct[]=[]
     this.ProService.getAllProducts().subscribe(ProLst=>{
       ExternalProductList=ProLst;
+      //console.log("ExternalProductList IN"+ProLst);
+      
+      //this.ReceivedCartItems=[]
     });
+
     this.ReceivedCartItems.forEach(element => {
-      var pro=ExternalProductList.find(p=>p.id==element.ID)
+      var pro=this.ProductsCompObj.prdListOfCat.find(p=>p.id==element.ID)
       if(pro!=null)
       {
+        //console.log(this.ProductsCompObj.prdListOfCat)
         pro.quantity-=element.count;
+        console.log(pro.name);
       }
     });
-    this.ReceivedCartItems=[]
+    
+    
   }
   RemoveItem(item:IProductQuantity)
   {

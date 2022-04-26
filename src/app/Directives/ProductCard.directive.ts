@@ -8,8 +8,8 @@ export class ProductCardDirective {
   constructor(private ElementRef:ElementRef) {
     
     //ElementRef.nativeElement.class=`border border-success mt-5 shadow  mb-5 bg-white rounded`;
-    ElementRef.nativeElement.style.border=`6px ${this.defaultColor} solid`;
-    ElementRef.nativeElement.style.borderRadius = "30px"
+    ElementRef.nativeElement.style.border=`3px ${this.defaultColor} solid`;
+    //ElementRef.nativeElement.style.borderRadius = "30px"
     ElementRef.nativeElement.style.boxShadow="0 0 9px #999999"
    }
 

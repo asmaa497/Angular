@@ -1,13 +1,13 @@
-<input #feedback type="text"
+<!-- <input #feedback type="text"
 class="form-control"   placeholder="Your feedback" value="this is my feedback">
-  
+   -->
 
 
 <div class="mb-3">
   <label for="" class="form-label">Select Category</label>
   <select class="form-control" name="cat" id="CatSel" title="catgory" [(ngModel)]="selectedCatID">
     <option value="0">Select All</option>
-    <option *ngFor="let cat of category" [value]="cat.ID">{{cat.name}}</option>
+    <option *ngFor="let cat of category" [value]="cat.id">{{cat.name}}</option>
   </select>
 </div>
 <div class="bg-warning">
