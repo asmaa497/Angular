@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategoryService } from 'src/app/services/category.service';
 
 import { ProductService } from 'src/app/services/product.service';
@@ -21,7 +22,8 @@ export class OrderComponent implements OnInit,AfterViewInit {
   @ViewChild(ProductsComponent) ProductsCompObj!: ProductsComponent;
   constructor(
     private ProService:ProductService,
-    private CatService:CategoryService 
+    private CatService:CategoryService ,
+    private router:Router
     ) { 
 /*
    this.category=[
@@ -72,25 +74,38 @@ export class OrderComponent implements OnInit,AfterViewInit {
   confirm()
   {
     //var ExternalProductList=this.ProductsCompObj.ProductList; // using View Child
-    var ExternalProductList:IProduct[]=[]
-    this.ProService.getAllProducts().subscribe(ProLst=>{
-      ExternalProductList=ProLst;
-      //console.log("ExternalProductList IN"+ProLst);
+    // var ExternalProductList:IProduct[]=[]
+    // this.ProService.getAllProducts().subscribe(ProLst=>{
+    //   ExternalProductList=ProLst;
+    //   //console.log("ExternalProductList IN"+ProLst);
       
-      //this.ReceivedCartItems=[]
-    });
-
+    //   //this.ReceivedCartItems=[]
+    // });
+    var pro:IProduct={} as IProduct
     this.ReceivedCartItems.forEach(element => {
-      var pro=this.ProductsCompObj.prdListOfCat.find(p=>p.id==element.ID)
-      if(pro!=null)
-      {
-        //console.log(this.ProductsCompObj.prdListOfCat)
-        pro.quantity-=element.count;
-        console.log(pro.name);
-      }
-    });
+      this.ProService.getProductByID(element.ID).subscribe(P=>{
+         //pro=P;
+         pro.id=P.id;
+         pro.catID=P.catID;
+         pro.price=P.price;
+         pro.img=P.img;
+         pro.name=P.name;
+         pro.quantity=P.quantity;
+         pro.quantity-=element.count;
+         
+            //console.log(this.ProductsCompObj.prdListOfCat)
+            
+            console.log("Pro quantity with new Quqan "+pro.quantity);
+
+            this.ProService.updatePro(pro,element.ID);
+            alert("Ordered Successfully");
+            this.router.navigate(["/Products"]);
+            //console.log(pro.name);         
+      }); //subscripe
+      
+    }); //foreach
     
-    
+    this.ReceivedCartItems=[]
   }
   RemoveItem(item:IProductQuantity)
   {

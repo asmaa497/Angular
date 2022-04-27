@@ -53,9 +53,9 @@ export class NewProductComponent implements OnInit {
     this.ProUpdateId=Number(this.activatedRoute.snapshot.paramMap.get("pid"));
     if(this.ProUpdateId!=0)
     {
-      this.prdService.updatePro(this.newPrd,+this.ProUpdateId).subscribe(prd=>{
-        this.router.navigate(['/Products']);
-      });
+      this.prdService.updatePro(this.newPrd,+this.ProUpdateId);
+      this.router.navigate(['/Products']);
+      
     }
     else
     {
