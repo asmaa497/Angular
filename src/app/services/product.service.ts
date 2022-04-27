@@ -49,7 +49,7 @@ export class ProductService {
 
   addNewProduct(newPrd: IProduct): Observable<IProduct>
   {
-    return this.httpClient.post<IProduct>(`${environment.APIBaseURL}/products`, JSON.stringify(newPrd),this.httpOptions);
+    return this.httpClient.post<IProduct>(`${environment.APIBaseURL}/product`, JSON.stringify(newPrd),this.httpOptions);
   }
 
   updatePro(updatedPro: IProduct, id: number|undefined)

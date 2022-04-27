@@ -29,6 +29,10 @@
   <div [hidden]="IsPurshased">
     <h1>Thanks for purchasing from our Store {{ClientName}}</h1>
   </div>
+  <div>
+    <button type="button" [routerLink]="['/NewProduct',0]"  style="width: 50%;margin-left: 20%;margin-bottom: 5%;"  class="btn btn-info">Add New Product</button>
+
+  </div>
   <!-- <div>
     <button (click)="hide()">BUY</button>
 
@@ -50,6 +54,7 @@
   </div>
   </div>
   <td><button [routerLink]="['/NewProduct',0]">Add New Product</button></td>
+  
   <!-- <div style="text-align: center;font-size: 50px;">{{birthDate | nationalID:"full"}}</div>
   <div style="text-align: center;font-size: 50px;">{{creditCart | credit}}</div> -->
   

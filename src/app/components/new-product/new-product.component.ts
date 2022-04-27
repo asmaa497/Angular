@@ -49,7 +49,7 @@ export class NewProductComponent implements OnInit {
   }
   saveProduct()
   {
-    this.newPrd.img='https://picsum.photos/id/237/150/100.jpg';
+    //this.newPrd.img='https://picsum.photos/id/237/150/100.jpg';
     this.ProUpdateId=Number(this.activatedRoute.snapshot.paramMap.get("pid"));
     if(this.ProUpdateId!=0)
     {

@@ -34,7 +34,7 @@
     <div class="mb-3">
       <label for="pImg" class="form-label">Product Image</label>
       <input type="file"
-        class="form-control" name="pImg" id="pImg" placeholder="" required min="0">
+        class="form-control" name="pImg" id="pImg" placeholder="" required min="0" [(ngModel)]="newPrd.img" >
       <small id="helpId" class="form-text text-muted"></small>
     </div>
     <button [disabled]="prdFrm.invalid" type="submit" class="btn btn-success" >Submit</button>

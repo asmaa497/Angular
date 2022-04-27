@@ -25,24 +25,7 @@ export class OrderComponent implements OnInit,AfterViewInit {
     private CatService:CategoryService ,
     private router:Router
     ) { 
-/*
-   this.category=[
-     {
-       ID:1,
-       name:"Mobile"
-     },
-     {
-      ID:2,
-      name:"TVs"
-    },
-    {
-      ID:3,
-      name:"Tablets"
-    }
-   ]
 
-    
-   */ 
 
 
 }
