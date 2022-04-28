@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { newArray } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { LoginResult } from '../ViewModels/login-result';
 import { User } from '../ViewModels/user';
 
 @Injectable({
@@ -23,11 +25,16 @@ export class AuthService {
   {
     return this.httpClient.post<User>(`${environment.APIBaseURL}/users`, JSON.stringify(newUser),this.httpOptions);
   }
-  Login()
+  Login(name:string,password:string)
   {
+    var userLoginInfo={
+      "UserName":name,
+      "password":password
+    }
+    
     // this should call login API 
-    let UserToken="aamlkemfk2365rkmflkaa21g5aetg453t";
-    localStorage.setItem("token",UserToken);
+    return this.httpClient.post<LoginResult>(`${environment.APIBaseURL}/account/login`, JSON.stringify(userLoginInfo),this.httpOptions);
+    
   }
   Logout()
   {
