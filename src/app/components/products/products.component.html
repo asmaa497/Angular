@@ -40,7 +40,8 @@
 
   <div *ngFor="let item of prdListOfCat" style="display: inline-block;" class="mx-3 mb-3">
   <div class="card" style="width: 18rem;" ProductCard defaultColor="yellow"   > <!--  -->
-    <img src="{{item.img}}" class="card-img-top" alt="card">
+    <!-- <img src="{{item.img}}" class="card-img-top" alt="card"> -->
+    <img [src]="CreateImgPath(item.img)" class="card-img-top" alt="card">
     <div class="card-body" >
       <h5 class="card-title">{{item.name}}</h5>
       <p class="card-text" style="color: blue;">Price : {{item.price}}</p>

@@ -14,6 +14,7 @@ export class NewProductComponent implements OnInit {
   newPrd: IProduct={} as IProduct;
   ProUpdateId:number=0
   catList: ICategory[]=[];
+  response:{dbpath:''}|undefined
   
  
   constructor(private prdService: ProductService
@@ -49,6 +50,12 @@ export class NewProductComponent implements OnInit {
   }
   saveProduct()
   {
+    if(this.response)
+    {
+      this.newPrd.img= this.response.toString() ;
+      console.log("this is image  "+this.newPrd.img)
+      
+    
     //this.newPrd.img='https://picsum.photos/id/237/150/100.jpg';
     this.ProUpdateId=Number(this.activatedRoute.snapshot.paramMap.get("pid"));
     if(this.ProUpdateId!=0)
@@ -63,6 +70,16 @@ export class NewProductComponent implements OnInit {
         this.router.navigate(['/Products']);
       });
     }
+  }
+  
+    
+  }
+
+  uploadFinished(event:any)
+  {
+    this.response= event.dbPath;
+    console.log("response  "+this.response);   
+    
     
   }
   

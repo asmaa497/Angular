@@ -31,12 +31,13 @@
         <option *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</option>
       </select>
     </div>
-    <div class="mb-3">
+    <!-- <div class="mb-3">
       <label for="pImg" class="form-label">Product Image</label>
       <input type="file"
         class="form-control" name="pImg" id="pImg" placeholder="" required min="0" [(ngModel)]="newPrd.img" >
       <small id="helpId" class="form-text text-muted"></small>
-    </div>
+    </div> -->
+    <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
     <button [disabled]="prdFrm.invalid" type="submit" class="btn btn-success" >Submit</button>
   </form>
   <hr>

@@ -23,7 +23,7 @@ export class AuthService {
 
   Register(newUser: User): Observable<User>
   {
-    return this.httpClient.post<User>(`${environment.APIBaseURL}/users`, JSON.stringify(newUser),this.httpOptions);
+    return this.httpClient.post<User>(`${environment.APIBaseURL}/account/register`, JSON.stringify(newUser),this.httpOptions);
   }
   Login(name:string,password:string)
   {
