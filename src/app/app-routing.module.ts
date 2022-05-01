@@ -15,8 +15,7 @@ import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   {path: '', component:LayoutComponent, children: [
-    {path:'', redirectTo:'/Home', pathMatch:'full'},
-    {path:'Home', component:HomeComponent},
+    
     {path:'Products', component:ProductsComponent},
     {path:'Products/:pid', component:ProductDetailsComponent},
     {path:'Order', component:OrderComponent},
@@ -26,7 +25,8 @@ const routes: Routes = [
     
 
   ]},
-  
+  {path:'', redirectTo:'/Home', pathMatch:'full'},
+  {path:'Home', component:HomeComponent},
   {path:'login', component:LoginComponent},
   {path:'logout', component:LogoutComponent},
   {path:'register', component:RegisterComponent},

@@ -74,6 +74,14 @@ export class ProductDetailsComponent implements OnInit {
   {
     return this.currPrdID==this.prdIDsList[this.prdIDsList.length-1];
   }
+  public  CreateImgPath(ServerPath:string|undefined)
+    {
+      console.log("server Path  "+ServerPath);
+       return `http://localhost:4319/${ServerPath}`;
+       
+       //D:/ITI study/Angular/APIAsmaa/EcommerceAPI/EcommerceAPI/Resources/Images/Screenshot (1).png
+       //Resources\Images\Screenshot (8).png
+    }
   
 
 }
