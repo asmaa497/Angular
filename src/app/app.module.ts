@@ -22,7 +22,8 @@ import { LayoutComponent } from './components/layout/layout.component';
 import {HttpClientModule} from '@angular/common/http';
 import { NewProductComponent } from './components/new-product/new-product.component';
 import { LogoutComponent } from './components/logout/logout.component';
-import { UploadComponent } from './components/upload/upload.component'
+import { UploadComponent } from './components/upload/upload.component';
+import { CartComponent } from './components/cart/cart.component'
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { UploadComponent } from './components/upload/upload.component'
     NewProductComponent,
     LogoutComponent,
     UploadComponent,
+    CartComponent,
    
   ],
   imports: [

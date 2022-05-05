@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { CartComponent } from './components/cart/cart.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { HomeComponent } from './components/home/home.component';
 import { LayoutComponent } from './components/layout/layout.component';
@@ -15,18 +16,19 @@ import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   {path: '', component:LayoutComponent, children: [
-    
+    {path:'', redirectTo:'/Home', pathMatch:'full'},
+    {path:'Home', component:HomeComponent},
     {path:'Products', component:ProductsComponent},
     {path:'Products/:pid', component:ProductDetailsComponent},
     {path:'Order', component:OrderComponent},
     {path:'AboutUs', component:AboutUsComponent},
     {path:'ContactUs', component:ContactUsComponent}, 
     {path:'NewProduct/:pid', component:NewProductComponent}, 
+    {path:'cart', component:CartComponent}, 
     
 
   ]},
-  {path:'', redirectTo:'/Home', pathMatch:'full'},
-  {path:'Home', component:HomeComponent},
+  
   {path:'login', component:LoginComponent},
   {path:'logout', component:LogoutComponent},
   {path:'register', component:RegisterComponent},

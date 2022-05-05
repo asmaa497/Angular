@@ -20,13 +20,16 @@ export class OrderComponent implements OnInit,AfterViewInit {
   ReceivedCartItems:IProductQuantity[]=[]
   @ViewChild('feedback') feedback!:ElementRef
   @ViewChild(ProductsComponent) ProductsCompObj!: ProductsComponent;
+  // cart 
+  cart:IProductQuantity[]=[]
   constructor(
     private ProService:ProductService,
     private CatService:CategoryService ,
     private router:Router
     ) { 
 
-
+      localStorage.setItem("cart",JSON.stringify( this.cart));
+      console.log("cart "+localStorage.getItem("cart"));
 
 }
   

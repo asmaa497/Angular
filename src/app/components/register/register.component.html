@@ -33,7 +33,7 @@
     [class.is-valid]="email.valid" [class.is-invalid]="email.invalid && email.touched" >
     <div [hidden]="email.valid || email.untouched">
       <small *ngIf="email.errors?.['email']" id="email" class="form-text text-muted d-block">Enter valid Email</small>
-  </div>
+    </div>
   </div>
   <div formGroupName="address">
     <div class="mb-4">
