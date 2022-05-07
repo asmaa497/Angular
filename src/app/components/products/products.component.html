@@ -1,12 +1,12 @@
 
-  <h1 style="color: green;margin-left: 40%;">{{strore.name}}</h1>
+  <!-- <h1 style="color: green;margin-left: 40%;">{{strore.name}}</h1> -->
   <!-- <img [src]="strore.logo"> -->
   <!-- <select [(ngModel)]="selectedCatID" (change)="selected()">
     <option *ngFor="let item of categroy" [ngValue]="item.id">{{ item.name }} </option>
   </select>
   <input [(ngModel)]="ClientName" > -->
   
-  <table class="table" [hidden]="!IsPurshased">
+  <!-- <table class="table" [hidden]="!IsPurshased">
     
     <ng-container *ngFor="let item of prdListOfCat" >
       <tr *ngIf=" item.quantity!=0" [ngStyle]="{'background-color':item.quantity==1? 'yellow':'lightgray', 'color':item.quantity>1? 'red':'darkblue'}">
@@ -14,7 +14,7 @@
       <td>{{ item.name }}</td>
       <td>{{ item.quantity }}</td>
       <td>{{ item.price |currency:'EGP' }}</td>
-      <td><img src="{{ item.img }}" /></td>
+      <td><img [src]="CreateImgPath(item.img)" width="40%" height="20%" /></td>
       <td>{{ item.catID }}</td>
       <td>{{ item.date |  date:'medium' }}</td>
       <td><a  class="btn btn-primary"  role="button" [routerLink]="['/Products', item.id]">Details</a></td>
@@ -22,7 +22,7 @@
       <td><a  class="btn btn-primary"  role="button" (click)="DeletePro(item.id)">Delete</a></td>
       <td><button (click)="decrease(item.id)">Decrease Quantity</button></td>
       <td><input #itemsCount type="number" [max]="item.quantity" min="1" class="form-control" style="background-color: white;"></td>
-      <td><button  class="btn btn-warning" (click)="AddToCartBtn(+itemsCount.value,item?.id)">Add To Cart</button></td>
+      <td><button  class="btn btn-warning" (click)="AddToCartBtn(+itemsCount.value,item)">Add To Cart</button></td>
       </tr>
     </ng-container>
   </table>
@@ -32,15 +32,14 @@
   <div>
     <button type="button" [routerLink]="['/NewProduct',0]"  style="width: 50%;margin-left: 20%;margin-bottom: 5%;"  class="btn btn-info">Add New Product</button>
 
-  </div>
+  </div> -->
   <!-- <div>
     <button (click)="hide()">BUY</button>
 
   </div> -->
 
-  <div *ngFor="let item of prdListOfCat" style="display: inline-block;" class="mx-3 mb-3">
-  <div class="card" style="width: 18rem;" ProductCard defaultColor="yellow"   > <!--  -->
-    <!-- <img src="{{item.img}}" class="card-img-top" alt="card"> -->
+  <!-- <div *ngFor="let item of prdListOfCat" style="display: inline-block;" class="mx-3 mb-3">
+  <div class="card" style="width: 18rem;" ProductCard defaultColor="yellow"   > 
     <img [src]="CreateImgPath(item.img)" class="card-img-top" alt="card">
     <div class="card-body" >
       <h5 class="card-title">{{item.name}}</h5>
@@ -49,12 +48,12 @@
       <div>
         <input #itemsCount type="number" [max]="item.quantity" min="1" class="form-control" style="background-color: white;">
       </div>
-      <button  class="btn btn-warning mb-1 mt-2" style="width: 100%;" (click)="AddToCartBtn(+itemsCount.value,item?.id)">Add To Cart</button>
+      <button  class="btn btn-warning mb-1 mt-2" style="width: 100%;" (click)="AddToCartBtn(+itemsCount.value,item)">Add To Cart</button>
       <a href="#" class="btn btn-warning mb-1 mt-1" style="width: 100%;" role="button" [routerLink]="['/Products', item.id]">Details</a>
     </div>
   </div>
   </div>
-  <td><button [routerLink]="['/NewProduct',0]">Add New Product</button></td>
+  <td><button [routerLink]="['/NewProduct',0]">Add New Product</button></td> -->
   
   <!-- <div style="text-align: center;font-size: 50px;">{{birthDate | nationalID:"full"}}</div>
   <div style="text-align: center;font-size: 50px;">{{creditCart | credit}}</div> -->
@@ -74,7 +73,7 @@
                 <input #itemsCount type="number" [max]="item.quantity" min="1" class="form-control" style="background-color: white;">
               </div>
               <div class="mb-1">
-                <a  class="btn btn-outline-secondary" style="width: 100%;" (click)="AddToCartBtn(+itemsCount.value,item?.id)">
+                <a  class="btn btn-outline-secondary" style="width: 100%;" (click)="AddToCartBtn(+itemsCount.value,item)">
                   <i class="bi bi-bag-check"></i> Add To Cart </a>    
               </div>
               <div>

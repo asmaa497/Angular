@@ -3,5 +3,7 @@ export interface IProductQuantity {
     name:string,
     price:number,
     count:number,
+    img:string,
+    quantity:number,
     total:number
 }

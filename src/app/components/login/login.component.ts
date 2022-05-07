@@ -2,6 +2,7 @@ import { ConstantPool } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { IProductQuantity } from 'src/app/ViewModels/iproduct-quantity';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +10,11 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  cart:IProductQuantity[]=[]
+  constructor(private AuthSer:AuthService,private router:Router) {
+    localStorage.setItem("cart",JSON.stringify( this.cart));
 
-  constructor(private AuthSer:AuthService,private router:Router) { }
+   }
   Islogged:boolean=false;
   UserName:string="";
   password:string="";

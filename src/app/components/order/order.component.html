@@ -21,7 +21,9 @@ class="form-control"   placeholder="Your feedback" value="this is my feedback">
     <td>{{ i+1 }}</td>
     <td>{{ item.name }}</td>
     <td>{{ item.price }}</td>
-    <td><button type="button" class="btn btn-info bg-lightblue" (click)="decrease(item)">-</button> {{ item.count }} <button type="button" class="btn btn-info" (click)="increase(item)">+</button></td>
+    <td><button type="button" class="btn btn-info bg-lightblue" (click)="decrease(item)">-</button> 
+      {{ item.count }} 
+    <button type="button" class="btn btn-info" (click)="increase(item)">+</button></td>
     <td>{{ item.total }}</td>
     <td><button (click)="RemoveItem(item)">Remove Item</button></td>
     </tr>

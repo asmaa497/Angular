@@ -21,31 +21,28 @@ export class OrderComponent implements OnInit,AfterViewInit {
   @ViewChild('feedback') feedback!:ElementRef
   @ViewChild(ProductsComponent) ProductsCompObj!: ProductsComponent;
   // cart 
-  cart:IProductQuantity[]=[]
   constructor(
     private ProService:ProductService,
     private CatService:CategoryService ,
     private router:Router
     ) { 
-
-      localStorage.setItem("cart",JSON.stringify( this.cart));
-      console.log("cart "+localStorage.getItem("cart"));
+     
 
 }
   
   ngAfterViewInit(): void {
-    this.feedback.nativeElement.style.backgroundColor="lightblue";
-    this.feedback.nativeElement.value="asmaa ismail";
-    console.log(this.feedback.nativeElement.value);
-    //console.log(this.ProductsCompObj.ProductList) // using View Child
-    console.log(this.ProService.getAllProducts())
+    // this.feedback.nativeElement.style.backgroundColor="lightblue";
+    // this.feedback.nativeElement.value="asmaa ismail";
+    // console.log(this.feedback.nativeElement.value);
+    // //console.log(this.ProductsCompObj.ProductList) // using View Child
+    // console.log(this.ProService.getAllProducts())
 
   }
   
   ngOnInit() {
     
     this.CatService.getAllCateogories().subscribe(CatLst=>{
-      console.log(JSON.stringify(CatLst));
+      //console.log(JSON.stringify(CatLst));
       this.category=CatLst;
     
     })
@@ -53,7 +50,7 @@ export class OrderComponent implements OnInit,AfterViewInit {
   }
   showCart(CartObj:IProductQuantity)
   {
-     console.log("cart OBJ "+CartObj);
+     //console.log("cart OBJ "+CartObj);
      this.ReceivedCartItems.push(CartObj);
      this.totalPrice+=CartObj.total;
   }
@@ -117,7 +114,7 @@ export class OrderComponent implements OnInit,AfterViewInit {
     var ExternalProductList:IProduct[]=[]
     this.ProService.getAllProducts().subscribe(ProLst=>{
       ExternalProductList=ProLst;
-    });
+  });
     
     //var ExternalProductList=this.ProductsCompObj.ProductList; // using View Child
     //var ExternalProductList=this.ProService.getAllProducts();

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+
 //import { ConsoleReporter } from 'jasmine';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -12,6 +13,7 @@ import { Store } from 'src/app/ViewModels/Store';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit,OnChanges{
+  
   strore = new Store();
   date:Date=new Date()
   FilteredProd:IProduct[]=[]
@@ -36,16 +38,16 @@ export class ProductsComponent implements OnInit,OnChanges{
     
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("this.receivedSelCatID"+this.receivedSelCatID);
+    //console.log("this.receivedSelCatID"+this.receivedSelCatID);
     this.ProService.getProductsByCatID(this.receivedSelCatID).subscribe(prdList=>{
-      console.log("the list coming "+JSON.stringify(prdList));
+      //console.log("the list coming "+JSON.stringify(prdList));
       this.prdListOfCat=prdList;
     });
     
     
   }
   ngOnInit() :void{
-    console.log("this.receivedSelCatID  "+this.receivedSelCatID);
+    //console.log("this.receivedSelCatID  "+this.receivedSelCatID);
     this.ProService.getAllProducts().subscribe(prdList=>{
       this.prdListOfCat=prdList;
     });
@@ -73,67 +75,34 @@ export class ProductsComponent implements OnInit,OnChanges{
     
   
   }
-  AddToCartBtn(itemsCount:number, ProID:number|undefined)
+  AddToCartBtn(itemsCount:number, Pro:IProduct)
   {
-    //alert(ProID);
-    //console.log(itemsCount);
-    var Test:IProduct
-    this.ProService.getProductByID(ProID).subscribe((prod)=>{
-      Test=prod;    
-      //console.log(Test);
-      if(prod!=null && prod.quantity>=itemsCount && itemsCount!=0)
-      {
-        let myObj:IProductQuantity=
-        {
-           ID:prod.id,
-           count:itemsCount,
-           name:prod.name,
-           price:prod.price,
-           total:prod.price*itemsCount
-         }
-        //  alert("muobj "+myObj);
-         this.onAddToCart.emit(myObj);
-         
-      }
-      else
-      {
-        alert("Invalid Quantity");
-      }
-    });
-    //console.log("asmaa");      
-    /*
-      if(prod!=null && prod.quantity>=itemsCount)
-      {
-        let myObj:IProductQuantity=
-        {
-           ID:prod.id,
-           count:itemsCount,
-           name:prod.name,
-           price:prod.price,
-           total:prod.price*itemsCount
-         }
-         this.onAddToCart.emit(myObj);
+    
+    //alert("id of product  "+JSON.stringify(Pro) );
+    //alert("itemsCount "+itemsCount);
+      let cartItems:IProductQuantity[]=JSON.parse((localStorage.getItem("cart")) as any);
+     var FoundPro= cartItems.find(P=>P.ID==Pro.id)
+     if(FoundPro)
+        alert("Product Already Exists");
+     else
+     {
 
-      }
-    */
-    /*
-      var prod=this.ProService.getAllProducts().find(p=>p.ID==ProID);
-      //var prod=this.ProductList.find(p=>p.ID==ProID);
-      if(prod!=null && prod.quantity>=itemsCount)
-      {
-        let myObj:IProductQuantity=
-        {
-           ID:prod.ID,
-           count:itemsCount,
-           name:prod.name,
-           price:prod.price,
-           total:prod.price*itemsCount
-         }
-         this.onAddToCart.emit(myObj);
-
-      }
-      */
-
+     
+      let item:IProductQuantity={} as IProductQuantity
+      item.ID=Pro.id;
+      item.count=itemsCount;
+      item.name=Pro.name;
+      item.img=Pro.img;
+      item.price=Pro.price;
+      item.quantity=Pro.quantity;
+      item.total=Pro.price*itemsCount;
+      console.log(item);
+      cartItems.push(item);
+      console.log("cartItems  "+JSON.stringify(cartItems) );
+      localStorage.setItem("cart",JSON.stringify(cartItems));
+      console.log("local now  "+localStorage.getItem("cart"));
+      alert("Added Successfully");
+     }
       
   }
   openNewPro()
@@ -161,7 +130,7 @@ export class ProductsComponent implements OnInit,OnChanges{
     }
   public  CreateImgPath(ServerPath:string)
     {
-      console.log("server Path  "+ServerPath);
+      //console.log("server Path  "+ServerPath);
        return `http://localhost:4319/${ServerPath}`;
        
        //D:/ITI study/Angular/APIAsmaa/EcommerceAPI/EcommerceAPI/Resources/Images/Screenshot (1).png

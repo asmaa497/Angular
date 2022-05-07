@@ -1,1 +1,36 @@
-<p>cart works!</p>
+
+<section>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Count</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total</th>
+        </tr>
+    </thead>
+    <ng-container *ngFor="let item of cartItems" >
+      <tr >
+      
+      <td>{{ item.name }}</td>
+      <td>{{ item.price |currency:'EGP' }}</td>
+      <td>          
+          <button type="button" class="btn btn-info bg-lightblue" (click)="decrease(item)">-</button> {{ item.count }} <button type="button" class="btn btn-info" (click)="increase(item)">+</button>
+      </td>
+      <td>{{ item.quantity }}</td>
+      <td><button type="button" class="btn btn-info bg-red" (click)="Remove(item)">Remove</button></td>
+      <td></td>
+      
+      
+      <!-- <td> <span class="w-2">  <img [src]="CreateImgPath(item.img)" width="40%" height="10%" /></span></td> -->
+      
+      </tr>
+    </ng-container>
+  </table>
+
+  <h1>Total Price : {{totalPrice}}</h1>
+  <button type="button"  style="width: 50%;margin-left: 20%;" (click)="confirm()" class="btn btn-info">Place Order</button>
+
+</section>
