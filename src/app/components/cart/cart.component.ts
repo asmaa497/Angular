@@ -44,9 +44,11 @@ export class CartComponent implements OnInit {
 
   }
   confirm() {
+    let counter:number=0;
     var pro: IProduct = {} as IProduct
     this.cartItems.forEach(element => {
       this.ProService.getProductByID(element.ID).subscribe(P => {
+        counter++;
         pro.id = P.id;
         pro.catID = P.catID;
         pro.price = P.price;
@@ -54,20 +56,31 @@ export class CartComponent implements OnInit {
         pro.name = P.name;
         pro.quantity = P.quantity - element.count;
         console.log("Pro  with new Quqan " + JSON.stringify(pro));
-        this.ProService.updatePro(pro, element.ID);
+        this.ProService.updatePro(pro, element.ID).subscribe(p=>{
+          var proIndex=this.cartItems.findIndex(p=>p==element);
+          this.cartItems.splice(proIndex,1);
+          localStorage.setItem("cart",JSON.stringify(this.cartItems) );
+          this.ProService.decreaseNumOfItems();
+          console.log("counter "+counter);
+          console.log("length "+this.cartItems.length);
+          if(this.cartItems.length==0)
+          {
+            this.router.navigate(['/Home']);
+            alert("Ordered Successfully");
+          }
+        });
+        
       });
     });
-
-    alert("Ordered Successfully");
-    //this.location.back();
-    this.router.navigate(['/Home']);
   }
 
 Remove(item:IProductQuantity)
 {
     var pro=this.cartItems.findIndex(i=>i==item);
     this.cartItems.splice(pro,1);
+
     this.totalPrice-=item.total;
+    this.ProService.decreaseNumOfItems();
 
 }
 

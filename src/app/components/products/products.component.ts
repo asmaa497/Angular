@@ -80,7 +80,7 @@ export class ProductsComponent implements OnInit,OnChanges{
     
     //alert("id of product  "+JSON.stringify(Pro) );
     //alert("itemsCount "+itemsCount);
-      let cartItems:IProductQuantity[]=JSON.parse((localStorage.getItem("cart")) as any);
+    let cartItems:IProductQuantity[]=JSON.parse((localStorage.getItem("cart")) as any);
      var FoundPro= cartItems.find(P=>P.ID==Pro.id)
      if(FoundPro)
         alert("Product Already Exists");
@@ -101,6 +101,7 @@ export class ProductsComponent implements OnInit,OnChanges{
       console.log("cartItems  "+JSON.stringify(cartItems) );
       localStorage.setItem("cart",JSON.stringify(cartItems));
       console.log("local now  "+localStorage.getItem("cart"));
+      this.ProService.increaseNumOfItems();
       alert("Added Successfully");
      }
       

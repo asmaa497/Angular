@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-header',
@@ -8,10 +10,20 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   Islogged:boolean=false;
-  constructor(private AuthSer:AuthService) { }
+  cartItemsNumber:number=0
+  constructor(private AuthSer:AuthService,private router:Router,private ProService:ProductService) { }
 
   ngOnInit() {
     this.Islogged=this.AuthSer.IsLogged;
+    this.ProService.getCartElementsNum().subscribe(num=>{
+      this.cartItemsNumber=num;
+    });
+  }
+  logout()
+  {
+    this.AuthSer.Logout();
+    this.router.navigate(['Home']);
+
   }
   
 

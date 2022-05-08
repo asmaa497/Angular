@@ -10,11 +10,11 @@ class="form-control"   placeholder="Your feedback" value="this is my feedback">
     <option *ngFor="let cat of category" [value]="cat.id">{{cat.name}}</option>
   </select>
 </div>
-<div class="bg-warning">
+<div>
   <app-products [receivedSelCatID]="selectedCatID" (onAddToCart)="showCart($event)"></app-products>
 </div>
 
-<table class="table">
+<!-- <table class="table">
     
   <ng-container *ngFor="let item of ReceivedCartItems ;let i = index"  >
     <tr >
@@ -28,6 +28,4 @@ class="form-control"   placeholder="Your feedback" value="this is my feedback">
     <td><button (click)="RemoveItem(item)">Remove Item</button></td>
     </tr>
   </ng-container>
-</table>
-<div style="text-align: center;font-size: 50px;">Total Price : {{totalPrice |currency:'EGP'}}</div>
-<button type="button"  style="width: 50%;margin-left: 20%;" (click)="confirm()" class="btn btn-info">Place Order</button>
+</table> -->
