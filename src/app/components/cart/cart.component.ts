@@ -32,6 +32,17 @@ export class CartComponent implements OnInit {
       item.count--;
       this.totalPrice -= item.price;
       item.total -= item.price;
+      /////////////// in local storage /////////////////
+      let items:IProductQuantity[]=JSON.parse((localStorage.getItem("cart")) as any);
+      var pro=items.find(P=>P.ID==item.ID);
+      if(pro)
+      {
+        pro.count=pro.count-1;
+        pro.total-=pro.price;
+        localStorage.setItem("cart",JSON.stringify(items));
+      }
+      console.log("local after edit "+(localStorage.getItem("cart")));
+
     }
 
   }
@@ -40,7 +51,19 @@ export class CartComponent implements OnInit {
       item.count++;
       this.totalPrice += item.price;
       item.total += item.price;
+      /////////////// in local storage /////////////////
+      let items:IProductQuantity[]=JSON.parse((localStorage.getItem("cart")) as any);
+      var pro=items.find(P=>P.ID==item.ID);
+      if(pro)
+      {
+        pro.count=pro.count+1;
+        pro.total+=pro.price;
+        localStorage.setItem("cart",JSON.stringify(items));
+      }
+      console.log("local after edit "+(localStorage.getItem("cart")));
+
     }
+    
 
   }
   confirm() {
@@ -76,13 +99,22 @@ export class CartComponent implements OnInit {
 
 Remove(item:IProductQuantity)
 {
-  //var res=this.confirm
+    var res=confirm("Delete Item ?");
+    if(res)
+    {
+
     var pro=this.cartItems.findIndex(i=>i==item);
     this.cartItems.splice(pro,1);
-
     this.totalPrice-=item.total;
-    this.ProService.decreaseNumOfItems();
+     /////////////// in local storage /////////////////
+     let items:IProductQuantity[]=JSON.parse((localStorage.getItem("cart")) as any);
+     var index=items.findIndex(P=>P.ID==item.ID);
+      items.splice(index,1);
+       localStorage.setItem("cart",JSON.stringify(items) );
+       console.log("local after del "+(localStorage.getItem("cart"))); 
+       this.ProService.decreaseNumOfItems();
 
+    }
 }
 
 
