@@ -64,7 +64,6 @@
         <li><a class="nav-link scrollto" routerLink="/Order" href="">Products</a></li>
         <li><a class="nav-link scrollto" href="">About Us</a></li>
         <li><a class="nav-link scrollto" href="">Contact Us</a></li>
-        <li><a class="nav-link scrollto navbar-right" (click)="logout()" [hidden]="!Islogged"  href="">Logout</a></li>
         
         <!-- <li class="dropdown megamenu"><a href="#"><span>Mega Menu</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
           <ul>
@@ -90,7 +89,7 @@
             </li>
           </ul>
         </li> -->
-        <li class="dropdown" style="background-color: white;"><a href="#"><span>Account</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+        <li class="dropdown" ><a ><span>Account</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
           <ul>
             <li><a routerLink="/register" [hidden]="Islogged"  href="">Register</a></li>
     
@@ -99,7 +98,7 @@
             
           </ul>
         </li>
-        <li [hidden]="!Islogged"><a href=""  class="cart position-relative d-inline-flex" aria-label="View your shopping cart">
+        <li [hidden]="!Islogged"><a routerLink="/cart"  class="cart position-relative d-inline-flex" aria-label="View your shopping cart">
           <span > <i class="fas fa fa-shopping-cart fa-lg" style="font-size: 40px;"></i> </span>
           <span class="cart-basket d-flex align-items-center justify-content-center" style="width: 30px;height:20px;margin-right: 10px;">
             {{cartItemsNumber}}

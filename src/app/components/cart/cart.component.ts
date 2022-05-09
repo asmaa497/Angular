@@ -76,6 +76,7 @@ export class CartComponent implements OnInit {
 
 Remove(item:IProductQuantity)
 {
+  //var res=this.confirm
     var pro=this.cartItems.findIndex(i=>i==item);
     this.cartItems.splice(pro,1);
 

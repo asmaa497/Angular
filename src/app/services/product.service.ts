@@ -15,6 +15,7 @@ export class ProductService {
   constructor(private httpClient: HttpClient) { 
     let cartItems:IProductQuantity[]=JSON.parse((localStorage.getItem("cart")) as any);
     this.NumOfItemsSubject=new BehaviorSubject<number>(cartItems.length);
+    console.log("this.NumOfItemsSubject  "+this.NumOfItemsSubject);
     this.httpOptions={
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -83,6 +84,10 @@ export class ProductService {
   decreaseNumOfItems()
   {
     this.NumOfItemsSubject.next((this.NumOfItemsSubject.getValue())-1);
+  }
+  refreshNumOfItems()
+  {
+    this.NumOfItemsSubject.next(JSON.parse((localStorage.getItem("cart")) as any).length);
   }
   
 }
