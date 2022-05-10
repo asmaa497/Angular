@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -9,6 +10,7 @@ import { ICategory } from 'src/app/ViewModels/ICategory';
 import { IProduct } from 'src/app/ViewModels/IProduct';
 import { IProductQuantity } from 'src/app/ViewModels/iproduct-quantity';
 import { Store } from 'src/app/ViewModels/Store';
+import { ImgComponent } from '../img/img.component';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -30,7 +32,8 @@ export class ProductsComponent implements OnInit, OnChanges {
   birthDate: string = "29909011509345"
   creditCart: string = "0000000000000000"
   TestPro: IProduct = {} as IProduct
-  constructor(private ProService: ProductService, private authSer: AuthService, private router: Router) {
+  constructor(private ProService: ProductService, private authSer: AuthService, private router: Router,
+    private dialog: MatDialog) {
     this.onAddToCart = new EventEmitter<IProductQuantity>();
     this.strore.logo = "https://fakeimg.pl/250x100/";
     this.strore.name = "ZARA Store";
@@ -133,5 +136,15 @@ export class ProductsComponent implements OnInit, OnChanges {
   public CreateImgPath(ServerPath: string) {
     return `http://localhost:4319/${ServerPath}`;
   }
+  openDialog(imgPath:string) {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const modalRef= this.dialog.open(ImgComponent, dialogConfig);
+    modalRef.componentInstance.img=imgPath;
+}
 
 }

@@ -64,7 +64,7 @@
   <div class="container-fluid mt-4" id="NewCategory">
       <ng-container *ngFor="let item of prdListOfCat">
         <div class="card mt-4" style="width:calc(95%/3);display:inline-block;margin:6px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-          <img class="card-img-top" [src]="CreateImgPath(item.img)" alt="Card image" style="width:100%;height:50%">
+        <a type="button"(click)="openDialog(item.img)">  <img class="card-img-top"  [src]="CreateImgPath(item.img)" alt="Card image" style="width:100%;height:50%">  </a>
           <div class="card-body">
               <h4 class="card-title" style="text-align:center;color:red;font-weight:bold">{{item.name}}</h4>
               <p class="card-text"> Price:  {{item.price}}</p>

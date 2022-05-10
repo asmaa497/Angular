@@ -4,6 +4,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { HomeComponent } from './components/home/home.component';
+import { ImgComponent } from './components/img/img.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
     {path:'ContactUs', component:ContactUsComponent}, 
     {path:'NewProduct/:pid', component:NewProductComponent}, 
     {path:'cart', component:CartComponent}, 
+    {path:'img', component:ImgComponent}, 
     
 
   ]},
