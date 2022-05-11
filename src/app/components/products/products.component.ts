@@ -78,7 +78,7 @@ export class ProductsComponent implements OnInit, OnChanges {
   }
   AddToCartBtn(itemsCount: number, Pro: IProduct) {
     if (this.authSer.IsLogged) {
-      if(itemsCount<=Pro.quantity)
+      if(itemsCount<=Pro.quantity && itemsCount>0)
       {
 
       
@@ -105,7 +105,7 @@ export class ProductsComponent implements OnInit, OnChanges {
       }
     }
     else{
-      alert("Not Enough Quantity");
+      alert("Enter Valid Quantity");
     }
     } else {
       alert("Log in First ");

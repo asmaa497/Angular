@@ -13,7 +13,11 @@ export class ProductService {
   private NumOfItemsSubject:BehaviorSubject<number>;
   private httpOptions;
   constructor(private httpClient: HttpClient) { 
-    let cartItems:IProductQuantity[]=JSON.parse((localStorage.getItem("cart")) as any);
+    let cartItems:IProductQuantity[]=[]
+    if(localStorage.getItem("cart")!=null)
+    {
+       cartItems=JSON.parse((localStorage.getItem("cart")) as any);
+    }
     this.NumOfItemsSubject=new BehaviorSubject<number>(cartItems.length);
     console.log("this.NumOfItemsSubject  "+this.NumOfItemsSubject);
     this.httpOptions={

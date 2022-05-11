@@ -18,10 +18,13 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(localStorage.getItem("cart")!=null)
+    {
     this.cartItems = JSON.parse((localStorage.getItem("cart")) as any);
     this.cartItems.forEach(element => {
       this.totalPrice += element.total;
     });
+  }
   }
   public CreateImgPath(ServerPath: string) {
     return `http://localhost:4319/${ServerPath}`;

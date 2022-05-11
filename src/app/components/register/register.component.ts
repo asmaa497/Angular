@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { passwordMatchValidator } from 'src/app/Custom Validators/Password';
+
 
 @Component({
   selector: 'app-register',
@@ -24,7 +26,7 @@ export class RegisterComponent implements OnInit {
       confirmPassword:[''],
       deliveryOptions:[''],
       specificDays:['']
-    });
+    }, { validators: passwordMatchValidator });
   
   
   }

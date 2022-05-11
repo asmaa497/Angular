@@ -118,6 +118,11 @@
       placeholder="">
   </div>
 
+  <div *ngIf="RegFormGroup.errors?.['passwordMismatch'] && (confirmPassword.touched || password.touched)"
+  class="cross-validation-error-message alert alert-danger">
+  Password and confirm password don't match.
+</div>
+
   <!-- <div *ngIf="userRegisterFormGroup.errors?.['passwordMismatch'] && (confirmPassword.touched || password.touched)"
     class="cross-validation-error-message alert alert-danger">
     Password and confirm password don't match.
